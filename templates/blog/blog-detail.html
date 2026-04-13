@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <article class="card border-0 shadow-sm mb-4">
+                    <img src="{% static 'landing/images/gal_1.jpg' %}" class="card-img-top" alt="Blog cover image">
+                    <div class="card-body p-4">
+                        <h1 class="h3 mb-3">All photographs are accurate</h1>
+                        <p class="text-muted mb-4">By Admin · April 12, 2026 · 6 min read</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas odit laboriosam adipisci exercitationem, asperiores rerum deserunt beatae voluptates dolore eaque. Architecto quos illum impedit, voluptatum tenetur deleniti iusto ea quas.</p>
+                        <p>Far far away, behind the word mountains, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown and then continued her way with confidence.</p>
+                    </div>
+                </article>
+
+                <section class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h2 class="h5 mb-4">Comments (5)</h2>
+
+                        <div class="d-flex mb-4">
+                            <img src="{% static 'landing/images/person_1.jpg' %}" class="rounded-circle" width="56" height="56" alt="Comment avatar">
+                            <div class="ml-3">
+                                <h3 class="h6 mb-1">Gigi Hadid</h3>
+                                <p class="small text-muted mb-2">Mar 09, 2018</p>
+                                <p class="mb-2">Great article. The writing style is clear and practical, and the examples are easy to apply on real projects.</p>
+                                <a href="#" class="small text-decoration-none">Reply</a>
+
+                                <div class="d-flex mt-3 ml-4 pl-3" style="border-left: 2px solid #e9ecef;">
+                                    <img src="{% static 'landing/images/person_2.jpg' %}" class="rounded-circle" width="44" height="44" alt="Reply avatar">
+                                    <div class="ml-3">
+                                        <h4 class="h6 mb-1">Admin</h4>
+                                        <p class="small text-muted mb-2">Mar 10, 2018</p>
+                                        <p class="mb-0">Thanks, Gigi. I will publish a follow-up with production-focused tips soon.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-4">
+                            <img src="{% static 'landing/images/person_2.jpg' %}" class="rounded-circle" width="56" height="56" alt="Comment avatar">
+                            <div class="ml-3">
+                                <h3 class="h6 mb-1">Christian Louboutin</h3>
+                                <p class="small text-muted mb-2">Mar 12, 2018</p>
+                                <p class="mb-2">Helpful tutorial. Could you also share a follow-up post for handling edge cases in production?</p>
+                                <a href="#" class="small text-decoration-none">Reply</a>
+
+                                <div class="d-flex mt-3 ml-4 pl-3" style="border-left: 2px solid #e9ecef;">
+                                    <img src="{% static 'landing/images/person_1.jpg' %}" class="rounded-circle" width="44" height="44" alt="Reply avatar">
+                                    <div class="ml-3">
+                                        <h4 class="h6 mb-1">Sarah Malik</h4>
+                                        <p class="small text-muted mb-2">Mar 13, 2018</p>
+                                        <p class="mb-0">Same question here. A quick checklist section would be super useful.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <img src="{% static 'landing/images/person_3.jpg' %}" class="rounded-circle" width="56" height="56" alt="Comment avatar">
+                            <div class="ml-3">
+                                <h3 class="h6 mb-1">Kendall Jenner</h3>
+                                <p class="small text-muted mb-2">Mar 20, 2018</p>
+                                <p class="mb-2">Nicely explained and easy to follow. I like how concise and straightforward the implementation is.</p>
+                                <a href="#" class="small text-decoration-none">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="h5 mb-1">Leave a Reply</h2>
+                        <p class="small text-muted mb-4">Your email address will not be published. Required fields are marked *</p>
+                        <form class="row">
+                            <div class="col-md-6">
+                                <label class="d-block font-weight-bold small">Name *</label>
+                                <input type="text" class="form-control" placeholder="Your name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="d-block font-weight-bold small">Email *</label>
+                                <input type="email" class="form-control" placeholder="your@email.com">
+                            </div>
+                            <div class="col-12 mt-3">
+                                <label class="d-block font-weight-bold small">Comment *</label>
+                                <textarea class="form-control" rows="5" placeholder="Write your comment..."></textarea>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <button type="submit" class="btn btn-dark">Post Comment</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="col-lg-4">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <label class="form-label">Search</label>
+                        <input type="search" class="form-control" placeholder="Search posts...">
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h2 class="h6 mb-3">Categories</h2>
+                        <div class="d-flex flex-wrap">
+                            <a href="#" class="btn btn-sm btn-outline-secondary">eCommerce</a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary ml-2">Creative UX</a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary ml-2">WordPress</a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary mt-2">HTML5</a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary ml-2 mt-2">Infographics</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h2 class="h6 mb-3">Popular Posts</h2>
+                        <div class="d-flex mb-3">
+                            <img src="{% static 'landing/images/gal_2.jpg' %}" width="72" height="72" class="rounded" alt="Popular post image">
+                            <div class="ml-3">
+                                <p class="mb-1 small font-weight-bold">Apple Introduces Search Ads Basic</p>
+                                <p class="mb-0 small text-muted">Jun 22, 2018</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <img src="{% static 'landing/images/gal_3.jpg' %}" width="72" height="72" class="rounded" alt="Popular post image">
+                            <div class="ml-3">
+                                <p class="mb-1 small font-weight-bold">New rules, more cars, more races</p>
+                                <p class="mb-0 small text-muted">Jun 8, 2018</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h2 class="h6 mb-2">Newsletter</h2>
+                        <p class="small text-muted">Get updates earlier than others.</p>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter email">
+                            <button class="btn btn-dark" type="button">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h2 class="h6 mb-3">Advert Space</h2>
+                        <div class="border rounded bg-light d-flex align-items-center justify-content-center" style="min-height: 180px;">
+                            <span class="text-muted small">Your advert will go here</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="h6 mb-3">Latest News</h2>
+                        <ul class="list-unstyled mb-0">
+                            <li class="pb-3 mb-3 border-bottom">
+                                <a href="#" class="text-dark font-weight-bold d-block">New portfolio case study released</a>
+                                <small class="text-muted">Apr 10, 2026</small>
+                            </li>
+                            <li class="pb-3 mb-3 border-bottom">
+                                <a href="#" class="text-dark font-weight-bold d-block">How we design fast-loading pages</a>
+                                <small class="text-muted">Apr 07, 2026</small>
+                            </li>
+                            <li>
+                                <a href="#" class="text-dark font-weight-bold d-block">UI update for blog experience</a>
+                                <small class="text-muted">Apr 04, 2026</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
