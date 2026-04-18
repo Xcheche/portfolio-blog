@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Testimonials{% endblock title %}
+
+{% block content %}
+<div class="untree_co-section testimonial-wrap">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-7 text-center mx-auto">
+        <h2 class="section-heading gsap-reveal-hero mb-0"><strong>Client Testimonials</strong></h2>
+        <p class="gsap-reveal-hero">Approved testimonials from clients and collaborators.</p>
+
+        <div class="wave gsap-reveal-hero">
+          <svg>
+            <path d="M10,10 L50,100 L90,50" stroke="#0389ff"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="owl-carousel owl-3-slider">
+      {% for c in testimonials %}
+      <div class="item">
+        <div class="testimonial-v1">
+          {% if c.testimonial_image %}
+            <img src="{{ c.testimonial_image.url }}" alt="{{ c.full_name|default:'Client' }}" class="img-fluid">
+          {% else %}
+            <img src="{% static 'landing/images/person_1.jpg' %}" alt="{{ c.full_name|default:'Client' }}" class="img-fluid">
+          {% endif %}
+          <div class="mb-3">
+            <h3>{{ c.full_name|default:'John Doe' }}</h3>
+            <span class="caption">{{ c.role|default:'Client' }}</span>
+          </div>
+          <p><strong>Project:</strong> {{ c.project_name|default:'Project Name' }}</p>
+          <blockquote>
+            <p>{{ c.message|default:'No message provided.' }}</p>
+          </blockquote>
+        </div>
+      </div>
+      {% empty %}
+      <div class="item">
+        <div class="testimonial-v1">
+          <img src="{% static 'landing/images/person_1.jpg' %}" alt="Client" class="img-fluid">
+          <div class="mb-3">
+            <h3>Testimonial coming soon</h3>
+            <span class="caption">No approved testimonials yet</span>
+          </div>
+          <blockquote>
+            <p>Your approved client testimonials will appear here.</p>
+          </blockquote>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-lg-7 text-center mx-auto">
+        <a href="{% url 'create_testimonial' %}" class="btn btn-outline-black mt-3">Submit Testimonial</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

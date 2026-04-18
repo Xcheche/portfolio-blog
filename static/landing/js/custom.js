@@ -112,13 +112,10 @@ $(function(){
 						items:1
 					},
 					800: {
-						items:2
+						items:1
 					},
 					1000:{
-						items:2
-					},
-					1100:{
-						items:3
+						items:1
 					}
 				}
 			});
@@ -288,7 +285,12 @@ $(function(){
 
 
 	var siteIstotope = function() {
-		var $container = $('#posts').isotope({
+		var $container = $('#p, #posts').first();
+		if (!$container.length) {
+			return;
+		}
+
+		$container.isotope({
 			itemSelector : '.item',
 			isFitWidth: true
 		});
@@ -566,7 +568,7 @@ portfolioItemClick();
 
 
 var owlSingleSlider = function () {
-	if ( $( '.single-slider' ).length ) {
+	if ( $( '.single-slider' ).length && !$('.single-slider').hasClass('owl-loaded') ) {
 		$('.single-slider').owlCarousel({
 			center: false,
 			items: 1,
@@ -594,6 +596,8 @@ var owlSingleSlider = function () {
 		});
 	}
 }
+
+owlSingleSlider();
 
 
 })

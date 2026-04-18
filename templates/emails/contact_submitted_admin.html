@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #222;">
+    <p>A new contact message was submitted.</p>
+    <p><strong>Name:</strong> {{ name|default:"-" }}</p>
+    <p><strong>Email:</strong> {{ email|default:"-" }}</p>
+    <p><strong>Subject:</strong> {{ subject|default:"-" }}</p>
+    <p><strong>Message:</strong></p>
+    <p>{{ message|default:"-"|linebreaksbr }}</p>
+  </body>
+</html>

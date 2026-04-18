@@ -3,9 +3,11 @@ from . import views
 
 
 urlpatterns = [
+    #----------------Portfolio app urls------------------#
     path("", views.home, name="home"),
-    path("blog-detail/", views.detail, name="blog-detail"),
-    # path('about/', views.about, name='about'),
-    # path('projects/', views.projects, name='projects'),
-    # path('contact/', views.contact, name='contact'),
+    #path("blog-detail/", views.detail, name="blog-detail"),
+    path('detail/<slug:slug>/', views.detail, name='detail'),
+    path('category/<slug:slug>/', views.category_view, name='category_view'),
+
+   
 ]

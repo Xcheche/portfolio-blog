@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="untree_co-section pb-0" id="portfolio-detail-section">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-8">
+        <a href="{% url 'home' %}#portfolio-section" class="d-inline-flex align-items-center mb-3 text-dark">
+          <span class="icon-chevron-left mr-2"></span>
+          Back to portfolio
+        </a>
+        <div class="wave gsap-reveal-hero mb-3 justify-content-center">
+          <svg>
+            <path d="M10,10 L50,100 L90,50" stroke="#0389ff"></path>
+          </svg>
+        </div>
+        <h1 class="heading gsap-reveal-hero mb-3"><strong>{{ portfolio.title }}</strong></h1>
+        <p class="subheading gsap-reveal-hero mb-4">{{ portfolio.category.name }} · {{ portfolio.created_at|date:"F d, Y" }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="bg-white rounded shadow-sm overflow-hidden">
+          <div class="owl-carousel single-slider">
+            {% if portfolio.image1 %}
+              <figure class="mb-0">
+                <img src="{{ portfolio.image1.url }}" alt="{{ portfolio.title }}" class="img-fluid w-100">
+              </figure>
+            {% else %}
+              <figure class="mb-0">
+                <div class="d-flex align-items-center justify-content-center bg-light" style="min-height: 320px;">
+                  <div class="text-center text-muted">
+                    <div class="mb-2">No main image available</div>
+                    <small>Upload a featured image for this project.</small>
+                  </div>
+                </div>
+              </figure>
+            {% endif %}
+
+            {% if portfolio.image2 %}
+              <figure class="mb-0">
+                <img src="{{ portfolio.image2.url }}" alt="{{ portfolio.title }} secondary image" class="img-fluid w-100">
+              </figure>
+            {% endif %}
+          </div>
+
+          <div class="p-4 p-lg-5 border-top">
+            <span class="d-block text-uppercase text-muted small mb-2">Share</span>
+            <h2 class="h4 text-black mb-3">Share this project</h2>
+            <div class="d-flex flex-wrap">
+              <a href="#" class="btn btn-outline-black mr-3 mb-3">Share by Email</a>
+              <a href="#" class="btn btn-black mb-3">Share (Non-Email)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="bg-white rounded shadow-sm p-4 p-lg-5 h-100">
+          <div class="mb-4">
+            <span class="d-block text-uppercase text-muted small mb-2">Project Info</span>
+         
+          </div>
+
+          <div class="detail-v1 mb-4">
+            <span class="detail-label d-block mb-1">Status</span>
+            <span class="detail-val text-capitalize">{{ portfolio.status }}</span>
+          </div>
+
+          <div class="detail-v1 mb-4">
+            <span class="detail-label d-block mb-1">Client</span>
+            <span class="detail-val">{{ portfolio.client|default:"Not specified" }}</span>
+          </div>
+
+          <div class="detail-v1 mb-4">
+            <span class="detail-label d-block mb-1">Category</span>
+            <span class="detail-val">{{ portfolio.category.name }}</span>
+          </div>
+
+          <div class="detail-v1 mb-4">
+            <span class="detail-label d-block mb-1">Published</span>
+            <span class="detail-val">{{ portfolio.created_at|date:"F d, Y" }}</span>
+          </div>
+
+          {% if portfolio.project_link %}
+            <a href="{{ portfolio.project_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-black btn-block">Visit Project</a>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="bg-white rounded shadow-sm p-4 p-lg-5">
+          <span class="d-block text-uppercase text-muted small mb-2">Overview</span>
+          <h2 class="h4 text-black mb-3">About this project</h2>
+          <p class="mb-0">{{ portfolio.description }}</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="bg-white rounded shadow-sm p-4 p-lg-5 h-100">
+          <span class="d-block text-uppercase text-muted small mb-2">Stack</span>
+          <h2 class="h4 text-black mb-3">Technology used</h2>
+          <p class="mb-0">{{ portfolio.tech_stack|default:"Not provided" }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-8 text-center">
+        <a href="{% url 'home' %}#portfolio-section" class="btn btn-outline-black">Back to Portfolio</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

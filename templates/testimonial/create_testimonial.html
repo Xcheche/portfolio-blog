@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Submit Testimonial{% endblock title %}
+{% block content %}
+<div class="untree_co-section" id="testimonial-form-section">
+	<div class="container">
+		<div class="row mb-5">
+			<div class="col-lg-7 text-center mx-auto">
+				<h2 class="section-heading mb-0"><strong>Share a Testimonial</strong></h2>
+				<p class="subheading">A static UI preview for client feedback submission.</p>
+
+				<div class="wave">
+					<svg>
+						<path d="M10,10 L50,100 L90,50" stroke="#0389ff"></path>
+					</svg>
+				</div>
+			</div>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="col-lg-8">
+				<div class="testimonial-v1 text-left p-4 p-md-5">
+					<h3 class="mb-2">Client Feedback Form</h3>
+				
+
+					<form action="{% url 'create_testimonial' %}" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						{% if form.non_field_errors %}
+						<div class="alert alert-danger" role="alert">
+							{{ form.non_field_errors }}
+						</div>
+						{% endif %}
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="full-name">Full Name</label>
+								{{ form.full_name }}
+								{{ form.full_name.errors }}
+							</div>
+							<div class="form-group col-md-6">
+								<label for="job-title">Role / Company</label>
+								{{ form.role }}
+								{{ form.role.errors }}
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="email">Email Address</label>
+								{{ form.email }}
+								{{ form.email.errors }}
+							</div>
+						
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="project-name">Project Name</label>
+								{{ form.project_name }}
+								{{ form.project_name.errors }}
+							</div>
+							<div class="form-group col-md-6">
+								<label for="client-image">Client Photo</label>
+								{{ form.testimonial_image }}
+								{{ form.testimonial_image.errors }}
+							</div>
+						</div>
+
+						
+
+						<div class="form-group">
+							<label for="testimonial-text">Message</label>
+							{{ form.message }}
+							{{ form.message.errors }}
+						</div>
+
+						<div class="form-group">
+							<label for="permission">Publishing Permission</label>
+							{{ form.permission_to_publish }}
+							{{ form.permission_to_publish.errors }}
+						</div>
+
+						<div class="custom-control custom-checkbox mb-4">
+							<input type="checkbox" class="custom-control-input" id="consent-check" required>
+							<label class="custom-control-label" for="consent-check">
+								I confirm this feedback can be stored for portfolio use.
+							</label>
+						</div>
+
+						<button type="submit" class="btn btn-outline-black">Submit Testimonial</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

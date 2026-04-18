@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #222;">
+    <p>A new testimonial was submitted and is waiting for approval.</p>
+    <p><strong>Name:</strong> {{ testimonial.full_name }}</p>
+    <p><strong>Email:</strong> {{ testimonial.email }}</p>
+    <p><strong>Role:</strong> {{ testimonial.role|default:"-" }}</p>
+    <p><strong>Project:</strong> {{ testimonial.project_name|default:"-" }}</p>
+    <p><strong>Permission to publish:</strong> {{ testimonial.permission_to_publish }}</p>
+    <p><strong>Message:</strong></p>
+    <p>{{ testimonial.message|linebreaksbr }}</p>
+  </body>
+</html>

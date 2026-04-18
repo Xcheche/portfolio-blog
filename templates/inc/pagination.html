@@ -1,0 +1,103 @@
+<div id="pg">
+
+<div class="portfolio-pagination-wrap mt-5" >
+  <nav aria-label="Portfolio pagination">
+    <ul class="pagination justify-content-center portfolio-pagination mb-0">
+      {# Previous button #}
+      {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous page">
+            <span class="icon-chevron-left"></span>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link" aria-hidden="true">
+            <span class="icon-chevron-left"></span>
+          </span>
+        </li>
+      {% endif %}
+
+      {# Loop page numbers HERE (this is the main pagination loop) #}
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">{{ num }}</span>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {# Next button #}
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next page">
+            <span class="icon-chevron-right"></span>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <span class="page-link" aria-hidden="true">
+            <span class="icon-chevron-right"></span>
+          </span>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+
+
+</div>
+
+
+<!--------------------Ajax for pagination--------------------------------------->
+<script>
+  document.addEventListener("click", async (e) => {
+    const a = e.target.closest("#pg a");
+    if (!a) return;
+
+    e.preventDefault();
+
+    const res = await fetch(a.href, {
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    });
+    const html = await res.text();
+
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const np = doc.querySelector("#p");
+    const npg = doc.querySelector("#pg");
+
+    if (np) document.querySelector("#p").innerHTML = np.innerHTML;
+    if (npg) document.querySelector("#pg").innerHTML = npg.innerHTML;
+
+    // Re-run grid layout after replacing items so cards do not overlap pagination.
+    if (window.jQuery && window.jQuery.fn && window.jQuery.fn.isotope) {
+      const $ = window.jQuery;
+      const $c = $("#p");
+      if ($c.length) {
+        if (!$c.data("isotope")) {
+          $c.isotope({
+            itemSelector: ".item",
+            isFitWidth: true
+          });
+        }
+
+        const activeFilter = $("#filters a.active").attr("data-filter") || "*";
+        $c.isotope("reloadItems");
+        $c.isotope({ filter: activeFilter });
+        $c.isotope("layout");
+
+        if ($.fn.imagesLoaded) {
+          $c.imagesLoaded().progress(function () {
+            $c.isotope("layout");
+          });
+        }
+      }
+    }
+
+    history.pushState({}, "", a.href); // optional, keeps URL in sync
+  });
+</script>
