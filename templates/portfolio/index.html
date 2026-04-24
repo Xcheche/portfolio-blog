@@ -34,7 +34,7 @@
           <div id="filters" class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item active" href="#" data-filter="*">All</a>
             {% for category in categories %}
-              <a class="dropdown-item" href="#" data-filter=".{{ category.slug }}">{{ category.name }}</a>
+              <a class="dropdown-item" href="#" data-filter=".{{ category.slug }}" data-url="{% url 'category_view' category.slug %}">{{ category.name }} {{ category.count }}</a>
             {% endfor %}
           </div>
         </div>
@@ -94,7 +94,7 @@
             {% if profile_user and profile_user.profile_image %}
               <img src="{{ profile_user.profile_image.url }}" alt="Profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
             {% else %}
-              <img src="{% static 'landing/images/person_1.jpg' %}" alt="Default profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
+              <img src="{{ profile_user.default_image_url }}" alt="Default profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
             {% endif %}
             <h3 class="text-black h5 font-weight-bold mb-2 gsap-reveal-hero">
               {{ profile_user.display_name|default:profile_user.username|default:"Your Name" }}
@@ -149,7 +149,7 @@
                 {% if c.testimonial_image %}
                   <img src="{{ c.testimonial_image.url }}" alt="{{ c.full_name|default:'Client' }}" class="img-fluid">
                 {% else %}
-                  <img src="{% static 'landing/images/person_1.jpg' %}" alt="{{ c.full_name|default:'Client' }}" class="img-fluid">
+                  <img src="{{ c.default_image_url }}" alt="{{ c.full_name|default:'Client' }}" class="img-fluid">
                 {% endif %}
                 <div class="mb-3">
                   <h3>{{ c.full_name|default:'John Doe' }}</h3>

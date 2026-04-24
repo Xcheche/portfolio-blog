@@ -26,7 +26,7 @@
           {% if c.testimonial_image %}
             <img src="{{ c.testimonial_image.url }}" alt="{{ c.full_name|default:'Client' }}" class="img-fluid">
           {% else %}
-            <img src="{% static 'landing/images/person_1.jpg' %}" alt="{{ c.full_name|default:'Client' }}" class="img-fluid">
+            <img src="https://pub-f2efc52b699544dc9bfcad46bfbd136f.r2.dev/media/portfolio_images/default-image.png" alt="{{ c.full_name|default:'Client' }}" class="img-fluid">
           {% endif %}
           <div class="mb-3">
             <h3>{{ c.full_name|default:'John Doe' }}</h3>
@@ -41,7 +41,7 @@
       {% empty %}
       <div class="item">
         <div class="testimonial-v1">
-          <img src="{% static 'landing/images/person_1.jpg' %}" alt="Client" class="img-fluid">
+          <img src="https://pub-f2efc52b699544dc9bfcad46bfbd136f.r2.dev/media/portfolio_images/default-image.png" alt="Client" class="img-fluid">
           <div class="mb-3">
             <h3>Testimonial coming soon</h3>
             <span class="caption">No approved testimonials yet</span>

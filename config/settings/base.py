@@ -14,7 +14,6 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 from django.contrib.messages import constants as messages
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # base.py lives in config/settings/, so go up three levels to project root.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -136,6 +135,60 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # Media files (User uploaded content)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# Cloudflare R2 storage (used by production when fully configured).
+CLOUDFLARE_R2_BUCKET = os.getenv("CLOUDFLARE_R2_BUCKET")
+CLOUDFLARE_R2_ACCESS_KEY = os.getenv("CLOUDFLARE_R2_ACCESS_KEY")
+CLOUDFLARE_R2_SECRET_KEY = os.getenv("CLOUDFLARE_R2_SECRET_KEY")
+CLOUDFLARE_R2_ENDPOINT_URL = os.getenv("CLOUDFLARE_R2_ENDPOINT_URL")
+CLOUDFLARE_R2_PUBLIC_URL = os.getenv("CLOUDFLARE_R2_PUBLIC_URL")
+
+
+# Cloudflare R2 storage options; used by production settings when fully configured.
+R2_STORAGE_OPTIONS = {
+    "bucket_name": CLOUDFLARE_R2_BUCKET,
+    "access_key": CLOUDFLARE_R2_ACCESS_KEY,
+    "secret_key": CLOUDFLARE_R2_SECRET_KEY,
+    "endpoint_url": CLOUDFLARE_R2_ENDPOINT_URL,
+    "region_name": "auto",
+    "addressing_style": "path",
+    "default_acl": "public-read",
+    "signature_version": "s3v4",
+    "querystring_auth": False,
+}
+# If a public URL is provided, use it as the custom domain for media files. This allows media URLs to be served directly from the R2 bucket or a CDN in front of it, rather than going through Django.
+if CLOUDFLARE_R2_PUBLIC_URL:
+    R2_STORAGE_OPTIONS["custom_domain"] = CLOUDFLARE_R2_PUBLIC_URL
+
+# Only use R2 storage if all required settings are provided. This allows the same codebase to work in development without R2, while seamlessly switching to R2 in production when the environment variables are set.
+USE_R2_STORAGE = all(
+    [
+        CLOUDFLARE_R2_BUCKET,
+        CLOUDFLARE_R2_ACCESS_KEY,
+        CLOUDFLARE_R2_SECRET_KEY,
+        CLOUDFLARE_R2_ENDPOINT_URL,
+        CLOUDFLARE_R2_PUBLIC_URL,
+    ]
+)
+# If R2 storage is configured, set up Django to use it for both default file storage and static files storage. This means that all media uploads and static files will be stored in the R2 bucket, allowing for scalable and performant file handling in production.
+if USE_R2_STORAGE:
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {
+                **R2_STORAGE_OPTIONS,
+                "location": "media",
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {
+                **R2_STORAGE_OPTIONS,
+                "location": "static",
+            },
+        },
+    }
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -165,13 +218,13 @@ MESSAGE_TAGS = {
 
 
 #---------------------Django Resized default settings (optional)---------------------
-DJANGORESIZED_DEFAULT_SIZE = [500, 500]
+DJANGORESIZED_DEFAULT_SIZE = [300, 300]
 DJANGORESIZED_DEFAULT_QUALITY = 75
 DJANGORESIZED_DEFAULT_KEEP_META = True
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = "JPEG"
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {
-    "JPEG": ["jpg", "jpeg"],
-    "PNG": ["png"],
-    "GIF": ["gif"],
-    "WEBP": ["webp"],
+    "JPEG": ".jpg",
+    "PNG": ".png",
+    "GIF": ".gif",
+    "WEBP": ".webp",
 }

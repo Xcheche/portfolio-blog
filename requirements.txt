@@ -11,3 +11,4 @@ gunicorn
 Pillow
 django-storages
 boto3
+django-resized

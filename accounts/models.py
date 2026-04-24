@@ -1,10 +1,24 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.core.files.storage import default_storage
+from django_resized import ResizedImageField
 
 from django.contrib.auth.models import AbstractUser, UserManager
 from Common.manager import CommonQuerySet, GeneralManager, AllObjectsManager
 from Common.models import CommonModel
 # Create your models here.
+
+
+
+#Default image
+def default_image():
+    # ImageField defaults must be storage-relative names, not full URLs.
+    """
+    Returns the default image path for portfolio items  from cloud storage. This function is used as the default value for the image fields in the Portfolio model, ensuring that if no image is uploaded, a default image from the cloud storage will be used instead.
+
+    """
+    return "portfolio_images/default-image.png"
+
 
 
 class ActiveUserManager(UserManager.from_queryset(CommonQuerySet)):
@@ -68,7 +82,9 @@ class CustomUser(CommonModel, AbstractUser):
     # Extra fields
     email = models.EmailField(unique=True,null=False,blank=False)
     bio = models.TextField(blank=True, null=True)
-    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    profile_image = ResizedImageField(upload_to='profile_images/',size=[300, 300],
+    crop=['middle', 'center'],
+                                       blank=True, null=True, default=default_image)
     display_name = models.CharField(max_length=150, blank=True, null=True)
     whatsapp_link = models.URLField(blank=True, null=True)
         
@@ -83,6 +99,10 @@ class CustomUser(CommonModel, AbstractUser):
 
     def __str__(self):
         return self.display_name or self.username
+
+    @property
+    def default_image_url(self):
+        return default_storage.url(default_image())
 
 
 

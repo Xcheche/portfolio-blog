@@ -306,6 +306,16 @@ $(function(){
 		$('#filters').on( 'click', 'a', function(e) {
 			e.preventDefault();
 			var filterValue = $(this).attr('data-filter');
+			var categoryUrl = $(this).attr('data-url');
+
+			if (filterValue !== '*') {
+				var hasMatchesOnCurrentPage = $container.find(filterValue).length > 0;
+				if (!hasMatchesOnCurrentPage && categoryUrl) {
+					window.location.href = categoryUrl;
+					return;
+				}
+			}
+
 			$container.isotope({ filter: filterValue });
 			$('#filters a').removeClass('active');
 			$(this).addClass('active');

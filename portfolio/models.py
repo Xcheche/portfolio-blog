@@ -4,6 +4,7 @@
 
 
 from django.db import models
+from django_resized import ResizedImageField
 
 
 from Common.models import CommonModel
@@ -15,9 +16,17 @@ from accounts.models import CustomUser
 
 
 
+#Default image
+def default_image():
+    # ImageField defaults must be storage-relative names, not full URLs.
+    """
+    Returns the default image path for portfolio items  from cloud storage. This function is used as the default value for the image fields in the Portfolio model, ensuring that if no image is uploaded, a default image from the cloud storage will be used instead.
+
+    """
+    return "portfolio_images/default-image.png"
 
 
-
+# Category Model
 class Category(CommonModel):
     name = models.CharField(max_length=255,db_index=True)
     slug = models.SlugField(unique=True)
@@ -46,8 +55,8 @@ class Portfolio(CommonModel):
     title = models.CharField(max_length=255,db_index=True)
     description = models.TextField()
     tech_stack = models.CharField(max_length=255, blank=True, null=True)
-    image1 = models.ImageField(upload_to='portfolio_images/', blank=True, null=True)
-    image2 = models.ImageField(upload_to='portfolio_images/', blank=True, null=True)
+    image1 = ResizedImageField(upload_to='portfolio_images/', blank=True, null=True, default=default_image)
+    image2 = ResizedImageField(upload_to='portfolio_images/', blank=True, null=True, default=default_image)
     
     project_link = models.URLField(blank=True, null=True)
     

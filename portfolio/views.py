@@ -50,7 +50,7 @@ def home(request):
     # Pagination and filtering for portfolio listing on home page
     
     portfolios = Portfolio.objects.filter(is_deleted=False, status="published").order_by("-created_at")
-    paginator = Paginator(portfolios, 3)  # Show 25 contacts per page.
+    paginator = Paginator(portfolios, 3)  # Show 3 contacts per page.
 
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -100,6 +100,7 @@ def detail(request,slug):
 # Category view with slug for portfolio category filtering
 def category_view(request, slug):
     category = get_object_or_404(Category, slug=slug, is_deleted=False)
+    
     portfolios = Portfolio.objects.filter(
         category=category,
         is_deleted=False,
@@ -108,6 +109,7 @@ def category_view(request, slug):
     context = {
         "category": category,
         "portfolios": portfolios,
+ 
     }
     return render(request, "portfolio/category.html", context)
 
