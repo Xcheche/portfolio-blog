@@ -38,3 +38,5 @@ if __name__ == "__main__":
 
 ## Blog implementation
 ### News letter
+
+## curl -v http://localhost:8000/

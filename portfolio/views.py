@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
+from types import SimpleNamespace
 
 from contact.models import Contact
 from portfolio.models import Portfolio, Category
@@ -60,6 +61,16 @@ def home(request):
     if owner_profile is None:
         owner_profile = CustomUser.objects.order_by("id").first()
     profile_user = request.user if request.user.is_authenticated else owner_profile
+    # Ensure profile_user is never None to avoid template VariableDoesNotExist
+    if profile_user is None:
+        profile_user = SimpleNamespace(
+            display_name="Your Name",
+            username="yourname",
+            profile_image=None,
+            default_image_url="/static/landing/images/person_1.jpg",
+            bio="",
+            whatsapp_link="",
+        )
     testimonials = Testimonial.objects.filter(is_approved=True).order_by("-created_at")
 
 

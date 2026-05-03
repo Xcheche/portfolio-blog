@@ -29,6 +29,7 @@ DEBUG = os.getenv("DEBUG", "True") == "True"
 ADMIN_URL = os.getenv("ADMIN_URL", "admin/")
 
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if host.strip()]
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if origin.strip()]
 
 
 # Quick-start development settings - unsuitable for production
@@ -53,7 +54,6 @@ INSTALLED_APPS = [
     "testimonial.apps.TestimonialConfig",
     "contact.apps.ContactConfig",
     #-----------------------------Third-party apps-------------------------#
-    'widget_tweaks',
 ]
 
 AUTH_USER_MODEL = "accounts.CustomUser"

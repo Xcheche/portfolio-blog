@@ -93,13 +93,19 @@
           <div class="col-lg-7 mx-auto text-center author-wrap">
             {% if profile_user and profile_user.profile_image %}
               <img src="{{ profile_user.profile_image.url }}" alt="Profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
-            {% else %}
+            {% elif profile_user and profile_user.default_image_url %}
               <img src="{{ profile_user.default_image_url }}" alt="Default profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
+            {% else %}
+              <img src="{% static 'landing/images/person_1.jpg' %}" alt="Default profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
             {% endif %}
             <h3 class="text-black h5 font-weight-bold mb-2 gsap-reveal-hero">
-              {{ profile_user.display_name|default:profile_user.username|default:"Your Name" }}
+              {% if profile_user %}
+                {{ profile_user.display_name|default:profile_user.username|default:"Your Name" }}
+              {% else %}
+                Your Name
+              {% endif %}
             </h3>
-            <p class="gsap-reveal-hero">{{ profile_user.bio|default:"Add a short bio in your profile."|safe }}</p>
+            <p class="gsap-reveal-hero">{% if profile_user %}{{ profile_user.bio|default:"Add a short bio in your profile."|safe }}{% else %}Add a short bio in your profile.{% endif %}</p>
           </div>
         </div>
 
@@ -109,7 +115,7 @@
 
         
 
-            <p class="gsap-reveal-hero text-center"><a href="{{ profile_user.whatsapp_link|default:'' }}" target="_blank" class="btn btn-outline-black">Hire Me </a></p>    
+            <p class="gsap-reveal-hero text-center"><a href="{% if profile_user %}{{ profile_user.whatsapp_link|default:'' }}{% endif %}" target="_blank" class="btn btn-outline-black">Hire Me </a></p>    
           </div>
         </div>
       </div>

@@ -1,0 +1,27 @@
+Once Docker is set up for Render:
+GHCR(Github Container Registry)
+
+Create a GitHub Personal Access Token (PAT) with the right package permissions (write packages & delete packages).
+
+### Log in to GitHub Container Registry
+docker login ghcr.io --username <GitHub username> --password <Access token>
+
+### Build the image ,can give any name not just portfolio-blog
+docker build -t ghcr.io/<GitHub username>/portfolio-blog .
+
+### Push to GitHub Container Registry
+docker push ghcr.io/<GitHub username>/portfolio-blog
+
+### Connect to Render
+Make sure github docker package is set to public ,click package settings ,change to public
+
+click add webservice on render, existing package, copy package url from ghcr and paste , configure/paste env variables
+
+
+######  Secure GHCR IMAGE###
+Click settings on render ,image then pause, go to github packages ,packages settings,change visibility back to private,go back to render settings image, click Add credentials
+
+name:e.g portfolio-blod-cred
+registry:github
+username:github username
+personal access token:<paste personal access token from github created>
