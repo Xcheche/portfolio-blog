@@ -30,10 +30,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+####Check About view,html and url patterns
+####Share feature for portolio
+###Total cleanup
+###Implement safe for portfolio content incase using markdown or html,implement a rich text editor for portfolio content
+#--------------------------------------#
 #TODO:Testing portfolio,contact and testimonial apps. Add more tests for accounts app. Add pagination to portfolio app. Add search functionality to portfolio app. Add categories/tags to portfolio app. Add user profiles with profile pictures and bios. Add social media links to user profiles. Add a blog section to share updates and news. Implement a more robust contact form with CAPTCHA and file attachments. Add an admin dashboard for managing testimonials and contact messages.
 #TODO:Implement reacptcha for contact and testimonial,share by email,share by id functionality for portfolio items,add categories/tags to portfolio items,add user profiles with profile pictures and bios,add social media links to user profiles,add a blog section to share updates and news,implement a more robust contact form with CAPTCHA and file attachments,add an admin dashboard for managing testimonials and contact messages.
-#TODO:Implement nginx for static and media file serving,add caching for improved performance,add logging and monitoring for better error tracking,add unit tests and integration tests for better code quality,add CI/CD pipeline for automated testing and deployment,add Docker support for easier development and deployment,add support for multiple languages/localization,add accessibility features for better usability,add a dark mode option for better user experience.
-#TODO:Docker,deployment,amazon ses,brevo domain name ,storage s3 bucket,cloudinary,imagekit,database for production neon db
+#TODO:Production email amazonses,brevo
+##Language translation for portfolio items and testimonials
 
 
 ## Blog implementation
