@@ -1,4 +1,8 @@
 from django.contrib import admin
+from django.db import models
+
+
+
 from .models import Category, Portfolio
 
 
@@ -44,12 +48,13 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class PortfolioAdmin(SoftDeleteAdminMixin, admin.ModelAdmin):
-    list_display = ("title", "user", "category", "status", "is_deleted", "deleted_at", "created_at", "updated_at","client")
+   
+    list_display = ("title", "user", "category", "status", "is_deleted", "deleted_at", "created_at", "updated_at","client","infrastructure")
     prepopulated_fields = {"slug": ("title",)}
     search_fields = ("title", "description", "tech_stack")
     list_filter = ("status", "is_deleted", "created_at", "updated_at")
     fieldsets = (
-        (None, {"fields": ("user", "category", "client", "title", "slug", "description", "tech_stack")}),
+        (None, {"fields": ("user", "category", "client", "title", "slug", "description", "tech_stack", "infrastructure")}),
         ("Media", {"fields": ("image1", "image2", "project_link")}),
         ("Publishing", {"fields": ("status",)}),
         ("Soft Delete", {"fields": ("is_deleted", "deleted_at")}),

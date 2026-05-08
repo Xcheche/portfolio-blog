@@ -609,6 +609,21 @@ var owlSingleSlider = function () {
 
 owlSingleSlider();
 
+// Scroll to top button functionality
+var scrollBtn = $('.scrollup');
+
+$(window).scroll(function() {
+	if ($(window).scrollTop() > 300) {
+		scrollBtn.addClass('show');
+	} else {
+		scrollBtn.removeClass('show');
+	}
+});
+
+scrollBtn.click(function(e) {
+	e.preventDefault();
+	$('html, body').animate({scrollTop: 0}, 600);
+});
 
 })
 

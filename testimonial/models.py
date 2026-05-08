@@ -1,7 +1,9 @@
 from django.db import models
 from django.core.files.storage import default_storage
 from django_resized import ResizedImageField
+
 from Common.models import CommonModel
+
 #Import default image function for portfolio models
 
 # Create your models here.
@@ -28,7 +30,7 @@ class Testimonial(CommonModel):
     email = models.EmailField()
     role = models.CharField(max_length=255, blank=True, null=True)
    
-    message = models.TextField()
+    message = models.TextField(blank=True, null=True)
     project_name = models.CharField(max_length=255, blank=True, null=True)
     permission_to_publish = models.CharField(max_length=20, choices=PermissionChoices.choices, 
                                              default=PermissionChoices.NO)

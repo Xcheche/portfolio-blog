@@ -49,9 +49,18 @@
           <div class="p-4 p-lg-5 border-top">
             <span class="d-block text-uppercase text-muted small mb-2">Share</span>
             <h2 class="h4 text-black mb-3">Share this project</h2>
-            <div class="d-flex flex-wrap">
-              <a href="#" class="btn btn-outline-black mr-3 mb-3">Share by Email</a>
-              <a href="#" class="btn btn-black mb-3">Share (Non-Email)</a>
+            <div class="d-flex flex-wrap align-items-center">
+              <div class="btn-group mr-3 mb-3">
+                <button type="button" class="btn btn-black dropdown-toggle mb-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-share-alt"></i> Share
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="{% url 'generate_share_link' portfolio.id %}" target="_blank">Copy / Share Link</a>
+                  <a class="dropdown-item" href="{% url 'share_portfolio' portfolio.id %}">Share via Email</a>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -97,7 +106,7 @@
         <div class="bg-white rounded shadow-sm p-4 p-lg-5">
           <span class="d-block text-uppercase text-muted small mb-2">Overview</span>
           <h2 class="h4 text-black mb-3">About this project</h2>
-          <p class="mb-0">{{ portfolio.description }}</p>
+          <p class="mb-0">{{ portfolio.description|default:"No description available."|safe }}</p>
         </div>
       </div>
 
@@ -107,7 +116,15 @@
           <h2 class="h4 text-black mb-3">Technology used</h2>
           <p class="mb-0">{{ portfolio.tech_stack|default:"Not provided" }}</p>
         </div>
+     
+          
       </div>
+         <!--Infrastructure-->
+       <div class="bg-white rounded shadow-sm p-4 p-lg-5 h-100">
+          <span class="d-block text-uppercase text-muted small mb-2">Infrastructure</span>
+          
+          <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
     </div>
 
     <div class="row justify-content-center mt-5">

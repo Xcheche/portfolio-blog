@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Share Portfolio Link{% endblock title %}
+
+{% block content %}
+<div class="untree_co-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="bg-white rounded shadow-sm p-4 p-lg-5">
+                    <h1 class="h4 mb-3">Share Link</h1>
+                    <p class="text-muted mb-4">Copy this link to share the portfolio post.</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" value="{{ share_url }}" readonly aria-label="Share URL">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-black" id="copy-share-link">Copy</button>
+                        </div>
+                    </div>
+                                        <p class="mb-0">
+                                            <a href="{{ share_url }}" target="_blank" rel="noopener noreferrer">Open the post</a>
+                                            &nbsp;
+                                            <a href="{% url 'share_portfolio' portfolio_id %}" class="btn btn-outline-black btn-sm ml-2" title="Share via Email">
+                                                <i class="fas fa-envelope"></i>
+                                            </a>
+                                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+                        const input = document.querySelector("input[type='text']");
+                        const button = document.getElementById("copy-share-link");
+                        if (!input || !button) return;
+
+                        const copyLink = async function () {
+                                input.select();
+                                try {
+                                        if (navigator.clipboard && window.isSecureContext) {
+                                                await navigator.clipboard.writeText(input.value);
+                                        } else {
+                                                document.execCommand("copy");
+                                        }
+                                        button.textContent = "Copied";
+                                } catch (error) {
+                                        button.textContent = "Copy failed";
+                                }
+                        };
+
+                        button.addEventListener("click", copyLink);
+        });
+    </script>
+{% endblock %}

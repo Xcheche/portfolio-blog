@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Share By Email{% endblock title %}
+
+{% block content %}
+<div class="untree_co-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="bg-white rounded shadow-sm p-4 p-lg-5">
+          <h1 class="h4 mb-3">Share By Email</h1>
+          <p class="text-muted mb-4">Send this project to someone by email.</p>
+
+          <div class="mb-4">
+            <label class="small text-muted mb-1 d-block">Project</label>
+            <div class="font-weight-bold">{{ portfolio.title }}</div>
+            <a href="{{ share_url }}" target="_blank" rel="noopener noreferrer">{{ share_url }}</a>
+          </div>
+
+          {% if sent %}
+            <div class="alert alert-success" role="alert">
+              Project shared successfully.
+            </div>
+            <a href="{% url 'detail' portfolio.slug %}" class="btn btn-outline-black">Back to project</a>
+          {% else %}
+            <form method="post">
+              {% csrf_token %}
+            <!--Display non-field errors-->
+              {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                  {{ form.non_field_errors }}
+                </div>
+              {% endif %}
+              <!---End non-field errors-->
+
+              <div class="form-group">
+                <label for="id_name">Your name</label>
+                {{ form.name }}
+                {{ form.name.errors }}
+              </div>
+
+              <div class="form-group">
+                <label for="id_email">Your email</label>
+                {{ form.email }}
+                {{ form.email.errors }}
+              </div>
+
+              <div class="form-group">
+                <label for="id_to">Recipient email</label>
+                {{ form.to }}
+                {{ form.to.errors }}
+              </div>
+
+              <div class="form-group">
+                <label for="id_comments">Comment (optional)</label>
+                {{ form.comments }}
+                {{ form.comments.errors }}
+              </div>
+
+              <button type="submit" class="btn btn-black">Send Email</button>
+              <a href="{% url 'detail' portfolio.slug %}" class="btn btn-outline-black ml-2">Back</a>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

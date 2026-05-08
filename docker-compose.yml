@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     image: portfolio-blog:latest
     container_name: portfolio-blog
     entrypoint: ["sh", "/app/entrypoint.sh"]
@@ -14,41 +14,25 @@ services:
     volumes:
       - .:/app
     environment:
-      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE:-config.settings.local}
-      DB_ENGINE: ${DB_ENGINE:-django.db.backends.postgresql}
-      DB_NAME: ${DB_NAME:-portfolio_blog_db}
-      DB_USER: ${DB_USER:-postgres}
-      DB_PASSWORD: ${DB_PASSWORD:-password}
-      DB_HOST: ${DB_HOST:-db}
-      DB_PORT: ${DB_PORT:-5432}
+      DEBUG: "True"
+      EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
+      EMAIL_HOST: mailpit
+      EMAIL_PORT: ${EMAIL_PORT:-1025}
+      EMAIL_USE_TLS: ${EMAIL_USE_TLS:-False}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,app,portfolio-blog}
-      DEBUG: ${DEBUG:-True}
-    # depends_on:
-    #   db:
-    #     condition: service_healthy
-    networks:
-      - portfolio_network
-  #db:  # Local Postgres (commented out when using external DB like Neon)
-  #  image: postgres:16-alpine
-  #  container_name: postgress-db
-  #  restart: always
-  #  environment:
-  #    POSTGRES_USER: ${POSTGRES_USER:-postgres}
-  #    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
-  #    POSTGRES_DB: ${POSTGRES_DB:-portfolio_blog_db}
-  #  volumes:
-  #    - db_data:/var/lib/postgresql/data
-  #  networks:
-  #    - portfolio_network
-  #  healthcheck:
-  #    test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
-  #    interval: 5s
-  #    timeout: 5s
-  #    retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
 networks:
-  portfolio_network:
-    driver: bridge
+  default:
+    name: portfolio_network
 
 volumes: {}
+
+
 

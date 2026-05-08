@@ -1,13 +1,11 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from Common.email import send_testimonial_submitted_notifications
 from testimonial.forms import TestimonialForm
 from testimonial.models import Testimonial
 
 # Create your views here.
-def testimonial(request):
-    testimonials = Testimonial.objects.filter(is_approved=True)
-    return render(request, "testimonial/testimonial.html", {"testimonials": testimonials})
 
 
 
@@ -23,7 +21,7 @@ def create_testimonial(request):
             send_testimonial_submitted_notifications(testimonial)
             
 
-            return redirect("testimonial")
+            return redirect(f"{reverse('home')}#testimonial-section")
     else:
         form = TestimonialForm()
         

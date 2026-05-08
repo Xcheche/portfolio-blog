@@ -15,7 +15,6 @@ from accounts.models import CustomUser
 
 
 
-
 #Default image
 def default_image():
     # ImageField defaults must be storage-relative names, not full URLs.
@@ -53,7 +52,7 @@ class Portfolio(CommonModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='portfolios')
 
     title = models.CharField(max_length=255,db_index=True)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     tech_stack = models.CharField(max_length=255, blank=True, null=True)
     image1 = ResizedImageField(upload_to='portfolio_images/', blank=True, null=True, default=default_image)
     image2 = ResizedImageField(upload_to='portfolio_images/', blank=True, null=True, default=default_image)
@@ -64,6 +63,7 @@ class Portfolio(CommonModel):
 
     status = models.CharField(max_length=20, choices=status_choices.choices, default='draft', db_index=True)
     client = models.CharField(max_length=255, blank=True, null=True)
+    infrastructure = models.TextField(blank=True, null=True)
 
     #OBJECT
     objects = GeneralManager()

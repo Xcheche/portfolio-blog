@@ -1,13 +1,17 @@
 from django.contrib import admin
+from django.db import models
+
 
 from Common.email import send_testimonial_approved_email
 from testimonial.models import Testimonial
 # Register your models here.
 
 class TestimonialAdmin(admin.ModelAdmin):
+   
     list_display = ('full_name', 'email', 'project_name', 'permission_to_publish', 'created_at', 'is_approved','role')
     list_filter = ('permission_to_publish', 'created_at', 'is_approved','role')
     search_fields = ('full_name', 'email', 'project_name')
+    list_editable = ('is_approved',)
 
 
 

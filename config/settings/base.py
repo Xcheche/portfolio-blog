@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "testimonial.apps.TestimonialConfig",
     "contact.apps.ContactConfig",
     #-----------------------------Third-party apps-------------------------#
+
 ]
 
 AUTH_USER_MODEL = "accounts.CustomUser"
@@ -228,3 +229,6 @@ DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {
     "GIF": ".gif",
     "WEBP": ".webp",
 }
+
+
+

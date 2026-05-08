@@ -27,6 +27,7 @@ urlpatterns = [
     path("", include("portfolio.urls")),
     path("contact/", include("contact.urls")),
     path("testimonial/", include("testimonial.urls")),
+    
 ]
 
 if settings.DEBUG:

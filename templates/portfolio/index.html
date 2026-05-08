@@ -10,9 +10,9 @@
         <div class="col-md-7">
           <h1 class="heading gsap-reveal-hero mb-3"><strong>Cheche<span class="text-primary">.</span> Portfolio</strong></h1>
           <h2 class="subheading gsap-reveal-hero mb-4">
-            Python Backend Developer with interest in Security and Machine Learning.
+            Python <a href="#Django">Django</a> Developer
           </h2>
-          <p class="gsap-reveal-hero"><a href="#" target="_blank" class="btn btn-outline-black">Resume</a></p>    
+          <p class="gsap-reveal-hero"><a href="{% url 'resume' %}" target="_blank" class="btn btn-outline-black">Resume</a></p>    
         </div>
       </div>
       
@@ -87,7 +87,7 @@
 
 
     <!-- ABOUT SECTION START -->
-    <div class="untree_co-section pb-0" id="about-section">
+    <div  class="untree_co-section pb-0" id="about-section">
       <div class="container">
         <div class="row justify-content-center mb-3">
           <div class="col-lg-7 mx-auto text-center author-wrap">
@@ -96,7 +96,7 @@
             {% elif profile_user and profile_user.default_image_url %}
               <img src="{{ profile_user.default_image_url }}" alt="Default profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
             {% else %}
-              <img src="{% static 'landing/images/person_1.jpg' %}" alt="Default profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
+              <img src="{{ profile_user.default_image_url }}" alt="Default profile image" class="img-fluid rounded-circle mb-3 about-profile-image">
             {% endif %}
             <h3 class="text-black h5 font-weight-bold mb-2 gsap-reveal-hero">
               {% if profile_user %}
@@ -128,7 +128,7 @@
 
     <!-- TESTIMONIALS SECTION START -->
     <div class="untree_co-section testimonial-wrap">
-      <div class="container">
+      <div class="container" id="testimonial-section">
         <div class="row mb-5">
           <div class="col-lg-7 text-center mx-auto">
             <h2 class="section-heading gsap-reveal-hero mb-0"><strong>Client Testimonials</strong></h2>
@@ -172,7 +172,7 @@
             {% empty %}
             <div class="item">
               <div class="testimonial-v1">
-                <img src="{% static 'landing/images/person_1.jpg' %}" alt="Client" class="img-fluid">
+                <img src="{{ c.default_image_url }}" alt="Client" class="img-fluid">
                 <div class="mb-3">
                   <h3>Testimonial coming soon</h3>
                   <span class="caption">Add approved testimonials in admin</span>
