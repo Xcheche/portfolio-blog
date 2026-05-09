@@ -37,3 +37,6 @@ which-settings:
 
 create-superuser:
 	docker compose exec app python manage.py createsuperuser
+
+collect-static:
+	docker compose exec app python manage.py collectstatic --noinput

@@ -132,8 +132,7 @@
         <div class="row mb-5">
           <div class="col-lg-7 text-center mx-auto">
             <h2 class="section-heading gsap-reveal-hero mb-0"><strong>Client Testimonials</strong></h2>
-            <p class="gsap-reveal-hero">Previewed using the same fields as the testimonial form.</p>
-
+            
             <div class="wave gsap-reveal-hero" >
               <svg>
                 <path d="M10,10 L50,100 L90,50" stroke="#0389ff"></path>
@@ -170,18 +169,10 @@
               </div>
             </div>
             {% empty %}
-            <div class="item">
-              <div class="testimonial-v1">
-                <img src="{{ c.default_image_url }}" alt="Client" class="img-fluid">
-                <div class="mb-3">
-                  <h3>Testimonial coming soon</h3>
-                  <span class="caption">Add approved testimonials in admin</span>
-                </div>
-                <blockquote>
-                  <p>Your approved client testimonials will appear here.</p>
-                </blockquote>
-              </div>
-            </div>
+          <p class="text-center">No testimonials are available at the moment.
+            <small class="d-block mt-2">Be the first to <a href="{% url 'create_testimonial' %}">submit a testimonial</a>!</small>
+          </p>
+       
             {% endfor %}
             {# Loop ends here #}
             <!-- END .item -->
@@ -191,11 +182,11 @@
         
           </div>
         </div>
-        <div class="row mt-4">
+        <!-- <div class="row mt-4">
           <div class="col-lg-7 text-center mx-auto">
             <a href="{% url 'create_testimonial' %}" class="btn btn-outline-black mt-3">Testimonial</a>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- TESTIMONIALS SECTION END -->

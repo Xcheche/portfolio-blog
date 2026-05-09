@@ -8,13 +8,15 @@ services:
     image: portfolio-blog:latest
     container_name: portfolio-blog
     entrypoint: ["sh", "/app/entrypoint.sh"]
-    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120
     ports:
       - "8000:8000"
-    # volumes:
-    #   - .:/app
+    volumes:
+      - .:/app
+    env_file:
+      - .env
     environment:
-      DEBUG: ${DEBUG:-False}
+      DEBUG: ${DEBUG:-True}
       EMAIL_BACKEND: ${EMAIL_BACKEND:-django.core.mail.backends.smtp.EmailBackend}
       # Default to Gmail SMTP; override via .env if needed
       EMAIL_HOST: ${EMAIL_HOST:-smtp.gmail.com}

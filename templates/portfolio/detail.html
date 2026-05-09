@@ -123,7 +123,7 @@
        <div class="bg-white rounded shadow-sm p-4 p-lg-5 h-100">
           <span class="d-block text-uppercase text-muted small mb-2">Infrastructure</span>
           
-          <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p class="mb-0">{{ portfolio.infrastructure|default:"Not provided"|safe }}</p>
         </div>
     </div>
 
