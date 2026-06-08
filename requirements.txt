@@ -21,6 +21,7 @@ django-resized==1.0.3
 django-storages==1.14.6
 django-timezone-field==7.2.1
 django-widget-tweaks==1.5.0
+django-anymail==14.0
 django_celery_results==2.6.0
 gunicorn==23.0.0
 jmespath==1.0.1

@@ -1,0 +1,61 @@
+"""
+Brevo email setup
+
+This project supports Brevo in two ways:
+
+1. Brevo SMTP relay
+2. Brevo through Anymail
+
+Use only one setup at a time.
+
+Brevo SMTP setup
+
+Use this if you want Brevo to work like a standard SMTP provider.
+
+1. Sign in to Brevo.
+2. Open Settings.
+3. Go to SMTP and API.
+4. Generate an SMTP key.
+5. Set these environment values:
+
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp-relay.brevo.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=apikey
+EMAIL_HOST_PASSWORD=your-brevo-smtp-key
+DEFAULT_FROM_EMAIL=verified-sender@example.com
+
+Brevo Anymail setup
+
+Use this if you want Django to send email through the Brevo API.
+
+1. Make sure Anymail is installed.
+2. Add anymail to INSTALLED_APPS.
+3. Set the Brevo API key in your environment.
+4. Switch Django to the Anymail backend.
+
+Example environment values:
+
+EMAIL_BACKEND=anymail.backends.brevo.EmailBackend
+BREVO_API_KEY=your-brevo-api-key
+DEFAULT_FROM_EMAIL=verified-sender@example.com
+
+How to switch
+
+If you want SMTP, use the SMTP block and remove or override the Anymail values.
+If you want Anymail, use the Anymail block and keep BREVO_API_KEY in the environment.
+
+Project note
+
+The production settings already read BREVO_API_KEY and default to the Brevo Anymail backend.
+###To view sent,failed,delivered emails
+1. Sign in to Brevo.
+2. On the dashboard click transactional >Realtime
+
+##Incase logged into brevo with email but want ot add a different email for sending from
+1. Sign in to Brevo.
+2. Open Settings.
+3. Go to senders,domains,ips and add the email andd bravo will send code to veridy, also there if has domain can configure email with domain for better deliverability and branding.
+
+"""

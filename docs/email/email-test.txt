@@ -1,0 +1,45 @@
+# Brevo test email
+#
+# Run this with Python, not directly in zsh:
+#
+#     python docs/email/email-test.txt
+#
+# The script loads Django settings, reads DEFAULT_FROM_EMAIL, and sends a test message.
+
+import os
+import sys
+from pathlib import Path
+
+import django
+from django.conf import settings
+from django.core.mail import send_mail
+from dotenv import load_dotenv
+
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(BASE_DIR))
+load_dotenv(BASE_DIR / ".env", override=True)
+
+debug_enabled = os.getenv("DEBUG", "False").lower() in {"1", "true", "yes", "on"}
+
+os.environ.setdefault(
+	"DJANGO_SETTINGS_MODULE",
+	"config.settings.local" if debug_enabled else "config.settings.production",
+)
+
+django.setup()
+
+subject = "Some subject"
+from_email = settings.DEFAULT_FROM_EMAIL
+message = "This is my test message"
+recipient_list = ["checheomenife@gmail.com", "chekwubechukwu23@gmail.com"]
+html_message = "<h1>This is my HTML test</h1>"
+
+send_mail(
+	subject,
+	message,
+	from_email,
+	recipient_list,
+	fail_silently=False,
+	html_message=html_message,
+)

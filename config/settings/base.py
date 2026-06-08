@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     "testimonial.apps.TestimonialConfig",
     "contact.apps.ContactConfig",
     #-----------------------------Third-party apps-------------------------#
+    "anymail",
+   
 
 ]
 
