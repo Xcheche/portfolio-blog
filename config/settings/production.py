@@ -40,7 +40,7 @@ if ssl_mode and not database_url:
 # Security settings for production.
 # Configure HTTPS, HSTS, and cookie security via your deployment platform
 # (e.g., nginx, Gunicorn, or your hosting provider) rather than Django settings.
-USE_X_FORWARDED_HOST = os.getenv("USE_X_FORWARDED_HOST", "True") == "True"
+USE_X_FORWARDED_HOST = os.getenv("USE_X_FORWARDED_HOST", "False") == "True"
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
